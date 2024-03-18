@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+docker build . -f dotfiles.Dockerfile -t dotfiles-computer

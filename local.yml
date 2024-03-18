@@ -1,0 +1,23 @@
+- hosts: localhost
+  vars:
+    source_key: "./.ssh/id_ed25519"
+    dest_key: "{{ lookup('env', 'HOME') }}/.ssh/id_ed25519"
+  become: true
+  pre_tasks:
+    - name: Update apt
+      apt:
+        force_apt_get: true
+        update_cache: true
+        state: present
+      tags:
+        - ssh
+        - zsh
+        - dotfiles
+        - neovim
+  tasks:
+    - import_tasks: tasks/ssh.yml
+    - import_tasks: tasks/core-utils.yml
+    - import_tasks: tasks/zsh.yml
+    - import_tasks: tasks/dotfiles.yml
+    - import_tasks: tasks/neovim.yml
+    - import_tasks: tasks/productivity.yml

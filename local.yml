@@ -16,6 +16,7 @@
         - neovim
   tasks:
     - import_tasks: tasks/ssh.yml
+    - import_tasks: tasks/git-setup.yml
     - import_tasks: tasks/core-utils.yml
     - import_tasks: tasks/zsh.yml
     - import_tasks: tasks/dotfiles.yml

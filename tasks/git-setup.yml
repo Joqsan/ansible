@@ -1,0 +1,49 @@
+- name: Git personal setup email
+  git_config:
+    name: user.email
+    scope: global
+    value: "joqsan.a@gmail.com"
+  tags:
+  - git-personal
+- name: Git personal setup name
+  git_config:
+    name: user.name
+    scope: global
+    value: "Joqsan Azocar"
+  tags:
+  - git-personal
+- name: Git personal setup core editor
+  git_config:
+    name: core.editor
+    scope: global
+    value: "nvim"
+  tags:
+  - git-personal
+- name: Git personal setup merge tool
+  git_config:
+    name: merge.tool
+    scope: global
+    value: "nvim"
+  tags:
+  - git-personal
+- name: Git personal setup mergetool cmd
+  git_config:
+    name: mergetool.nvim.cmd
+    scope: global
+    value: 'nvim -d -c "wincmd l" -c "norm ]c" "$LOCAL" "$MERGED" "$REMOTE"'
+  tags:
+  - git-personal
+- name: Git personal setup mergetool keepBackup
+  git_config:
+    name: mergetool.keepBackup
+    scope: global
+    value: false
+  tags:
+  - git-personal
+- name: Git personal setup mergetool prompt
+  git_config:
+    name: mergetool.prompt
+    scope: global
+    value: false
+  tags:
+  - git-personal

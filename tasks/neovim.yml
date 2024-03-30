@@ -1,11 +1,10 @@
-- name: Git clone neovim
-  git:
-    repo: https://github.com/neovim/neovim.git
-    dest: $HOME/neovim
-  tags:
-    - neovim
+- name: Install neovim
+  tags: neovim
+  block:
+    - name: Git clone neovim
+      git:
+        repo: https://github.com/neovim/neovim.git
+        dest: $HOME/neovim
 
-- name: Install neovim last stable version
-  shell: cd $HOME/neovim && make CMAKE_BUILD_TYPE=RelWithDebInfo && git checkout stable && make install
-  tags:
-    - neovim
+    - name: Install neovim lastest stable version
+      shell: cd $HOME/neovim && make CMAKE_BUILD_TYPE=RelWithDebInfo && git checkout stable && make install

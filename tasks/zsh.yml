@@ -1,33 +1,36 @@
-- name: Install zsh
-  apt: name=zsh
+- name: Install and configure zsh
   tags: zsh
+  block:
+    - name: Install zsh
+      apt: name=zsh
 
-- name: Change shell
-  shell: chsh -s `which zsh`
-  tags: zsh
+    - name: Change shell
+      shell: chsh -s `which zsh`
 
-- name: Install ohmyzsh
-  shell: curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh > ~/.oh-my-installer && chmod +x ~/.oh-my-installer && ~/.oh-my-installer
-  tags: zsh
+    - name: Install ohmyzsh
+      shell: curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh > ~/.oh-my-installer && chmod +x ~/.oh-my-installer && ~/.oh-my-installer
 
-- name: Download powerlevel10k theme 
-  shell: git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
-  tags: zsh
+    - name: Download powerlevel10k theme 
+      shell: git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 
-# - name: Add powerlevel10k custom
-#   shell: cp -a .dotfiles/. ~/
-#   tags: zsh
+    # - name: Add powerlevel10k custom
+    #   shell: cp -a .dotfiles/. ~/
+    #   tags: zsh
 
-# - name: New powerlevel10k custom
-#   shell: cp /usr/local/bin/.p10k.sh.bak ~/.p10k.zsh  
-#   tags: zsh
+    # - name: New powerlevel10k custom
+    #   shell: cp /usr/local/bin/.p10k.sh.bak ~/.p10k.zsh  
+    #   tags: zsh
 
-- name: Install the zsh plugin for autosuggestions
-  ansible.builtin.git:
-    repo: 'https://github.com/zsh-users/zsh-autosuggestions.git'
-    dest: ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
-  tags: zsh
+    - name: Install the zsh plugin for autosuggestions
+      ansible.builtin.git:
+        repo: 'https://github.com/zsh-users/zsh-autosuggestions.git'
+        dest: ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
 
-- name: Remove existing .zshrc for stowing the correct one
-  shell: rm $HOME/.zshrc
-  tags: zsh
+    - name: Check if .zshrc exists
+      stat:
+        path: $HOME/.zshrc
+      register: zsh_filepath
+
+    - name: Remove .zshrc for stowing the correct one
+      shell: rm $HOME/.zshrc
+      when: zsh_filepath.stat.exists == True

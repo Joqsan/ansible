@@ -5,12 +5,16 @@
       apt: name=stow
 
     - name: Cloning .dotfiles
+      become_user: "{{ username }}"
       ansible.builtin.git:
         repo: 'git@github.com:Joqsan/.dotfiles.git'
         dest: "{{ lookup('env', 'HOME') }}/.dotfiles"
+        key_file: "{{ dest_key }}"
         update: yes
         accept_hostkey: yes
         version: master
+      
 
     - name: Stow dotfiles
-      shell: cd $HOME/.dotfiles && chmod +x ubuntu install && ./ubuntu
+      become_user: "{{ username }}"
+      shell: cd {{ lookup('env', 'HOME') }}/.dotfiles && chmod +x ubuntu install && ./ubuntu

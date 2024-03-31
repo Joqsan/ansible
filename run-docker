@@ -1,1 +1,1 @@
-docker run --rm -it dotfiles-computer bash    
+docker run -v $(pwd):/usr/local/bin --rm -it dotfiles-computer bash

@@ -22,6 +22,9 @@ RUN apt update && apt install -y software-properties-common \
 # USER $USERNAME
 
 WORKDIR /usr/local/bin
+COPY . .
+RUN ansible-playbook local.yml --vault-password-file my-pass
+ENTRYPOINT ["/bin/zsh"]
 # WORKDIR /home/joqsan
 # COPY --chown=joqsan:joqsan . .
 

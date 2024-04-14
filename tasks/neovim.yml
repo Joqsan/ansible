@@ -2,9 +2,10 @@
   tags: neovim
   block:
     - name: Git clone neovim
-      git:
-        repo: https://github.com/neovim/neovim.git
-        dest: $HOME/neovim
+      shell: |
+        curl -kLO https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz
+        rm -rf /opt/nvim
+        tar -C /opt -xzf nvim-linux64.tar.gz
 
-    - name: Install neovim lastest stable version
-      shell: cd $HOME/neovim && make CMAKE_BUILD_TYPE=RelWithDebInfo && git checkout stable && make install
+    - name: Add neovim binaries to PATH;
+      shell: echo 'export PATH="$PATH:/opt/nvim-linux64/bin"' >> {{ home_dir }}/.zshrc

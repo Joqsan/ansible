@@ -25,7 +25,11 @@ WORKDIR /usr/local/bin
 # WORKDIR /home/joqsan
 # COPY --chown=joqsan:joqsan . .
 
-# COPY . .
+COPY my-pass my-pass
+COPY .ssh .ssh
+COPY tasks tasks
+COPY local.yml local.yml
+COPY run-ansible run-ansible
 
 
 

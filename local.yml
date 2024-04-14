@@ -1,5 +1,6 @@
 - hosts: localhost
   vars:
+    node_version: "20.12.2"
     source_key: "./.ssh/id_ed25519"
     dest_key: "{{ lookup('env', 'HOME') }}/.ssh/id_ed25519"
     home_dir: "{{ lookup('env', 'HOME') }}"
@@ -17,12 +18,15 @@
         - dotfiles
         - neovim
         - debug
+        - nodejs
   tasks:
+    - import_tasks: tasks/nodejs.yml
     - import_tasks: tasks/ssh.yml
     - import_tasks: tasks/git-setup.yml
     # - import_tasks: tasks/core-utils.yml
     - import_tasks: tasks/zsh.yml
     - import_tasks: tasks/dotfiles.yml
+    - import_tasks: tasks/python.yml
     # - import_tasks: tasks/neovim.yml
     # - import_tasks: tasks/productivity.yml
     # - import_tasks: tasks/docker.yml

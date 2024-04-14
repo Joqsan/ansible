@@ -1,5 +1,4 @@
 - name: Configure ssh
-  become_user: "{{ username }}"
   tags: ssh
   block:
     - name: Ensure .ssh directory exists.

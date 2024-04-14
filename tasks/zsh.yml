@@ -1,25 +1,19 @@
 - name: Install and configure zsh
-  become: true
   tags: zsh
   block:
     - name: Install zsh
       apt: name=zsh
 
     - name: Change shell
-      shell: chsh -s $(which zsh) {{ username }}
+      shell: chsh -s $(which zsh)
 
     - name: Install ohmyzsh
-      become_user: "{{ username }}"
-      shell: sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-      args:
-        creates: "{{ home_dir }}/.oh-my-zsh"
+      shell: sh -c "$(curl -fsSL https://install.ohmyz.sh/)"
       
     - name: Download powerlevel10k theme
-      become_user: "{{ username }}"
       shell: git clone --depth=1 https://github.com/romkatv/powerlevel10k.git {{ home_dir }}/.oh-my-zsh/custom/themes/powerlevel10k
 
     - name: Install the zsh plugin for autosuggestions
-      become_user: "{{ username }}"
       git:
         repo: 'https://github.com/zsh-users/zsh-autosuggestions.git'
         dest: "{{ home_dir }}/.oh-my-zsh/custom/plugins/zsh-autosuggestions"

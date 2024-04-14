@@ -5,7 +5,6 @@
       apt: name=stow
 
     - name: Cloning .dotfiles
-      become_user: "{{ username }}"
       git:
         repo: 'git@github.com:Joqsan/.dotfiles.git'
         dest: "{{ home_dir }}/.dotfiles"
@@ -16,5 +15,4 @@
         version: master
       
     - name: Stow dotfiles
-      become_user: "{{ username }}"
       shell: cd {{ home_dir }}/.dotfiles && chmod +x ubuntu install && ./ubuntu

@@ -1,11 +1,12 @@
 - name: Install neovim
   tags: neovim
   block:
-    - name: Git clone neovim
+    - name: Download neovim binaries
+      # use -k flag to make curl work (problem with docker and SSL connection)
       shell: |
         curl -kLO https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz
         rm -rf /opt/nvim
         tar -C /opt -xzf nvim-linux64.tar.gz
 
-    - name: Add neovim binaries to PATH;
+    - name: Add neovim binaries to PATH
       shell: echo 'export PATH="$PATH:/opt/nvim-linux64/bin"' >> {{ home_dir }}/.zshrc

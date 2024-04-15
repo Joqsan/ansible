@@ -3,17 +3,9 @@
     name: "{{ item }}"
     state: latest
   with_items:
-      - ca-certificates
-      - gcc
-      - ninja-build
-      - gettext
-      - cmake
+      - git
+      - wget
       - unzip
       - curl
-      - git
-      - locales
-      - nodejs
-      - npm
-      - ripgrep
   tags:
     - core

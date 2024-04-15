@@ -4,7 +4,7 @@
     - name: Install stow
       apt: name=stow
 
-    - name: Cloning .dotfiles
+    - name: Clone .dotfiles
       git:
         repo: 'git@github.com:Joqsan/.dotfiles.git'
         dest: "{{ home_dir }}/.dotfiles"

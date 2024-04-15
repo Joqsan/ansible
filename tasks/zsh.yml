@@ -23,6 +23,6 @@
         path: "{{ home_dir }}/.zshrc"
       register: zsh_filepath
 
-    - name: Remove .zshrc for stowing the correct one
+    - name: Remove .zshrc, if exists, stowing the correct one
       shell: "rm {{ home_dir }}/.zshrc"
       when: zsh_filepath.stat.exists == True

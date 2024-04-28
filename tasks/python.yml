@@ -1,6 +1,11 @@
 - name: Set Python environment
   tags: python
   block:
+    - name: Install dependencies for Python venv-selector.nvim
+      apt:
+        name: fd-find
+        state: present
+
     - name: Install nodejs for pyright lsp
       import_tasks: nodejs.yml
     

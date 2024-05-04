@@ -2,3 +2,19 @@
   shell: git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install
   tags:
     - productivity
+
+- name: Download jumper
+  git:
+    repo: 'https://github.com/homerours/jumper'
+    dest: "{{ home_dir }}/jumper"
+
+- name: Install jumper
+  command: make install
+  chdir: "{{ home_dir }}/jumper"
+
+- name: Add jumper to .zshrc
+  shell: |
+    echo 'source $HOME/jumper/shell/jumper.zsh' >> {{ home_dir }}/.zshrc
+    echo '# Change default (ctrl-y and ctrl-u) bindings:' >> {{ home_dir }}/.zshrc
+    echo "bind -x '\"\C-d\": jumper-find-dir'" >> {{ home_dir }}/.zshrc
+    echo "bind -x '\"\C-f\": jumper-find-file'" >> {{ home_dir }}/.zshrc

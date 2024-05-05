@@ -42,3 +42,9 @@
         name: mergetool.prompt
         scope: global
         value: false
+    
+    - name: Avoid paging when running git commands
+      git_config:
+        name: core.pager
+        scope: global
+        value: "cat"

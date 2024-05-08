@@ -21,6 +21,7 @@
         - nodejs
         - git
         - python
+        - vscode
   tasks:
     - import_tasks: tasks/nodejs.yml
     - import_tasks: tasks/ssh.yml
@@ -30,5 +31,6 @@
     - import_tasks: tasks/dotfiles.yml
     # - import_tasks: tasks/python.yml
     - import_tasks: tasks/productivity.yml
+    - import_tasks: tasks/vscode.yml
     # - import_tasks: tasks/neovim.yml
     # - import_tasks: tasks/docker.yml

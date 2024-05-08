@@ -9,6 +9,7 @@
       - curl
       - ripgrep  # needed for telescope.nvim
       - fd-find  # needed for venv-selector.nvim
+      - locales  # needed for setting UTF-8 for tmux (to use tmux instead of tmux -u)
   tags:
     - core
 
@@ -22,3 +23,14 @@
     dest: "/usr/local/bin/fd"
     state: link
   when: fdfind_path is succeeded
+
+- name: Generate UTF-8 localisation files
+  locale_gen:
+    name: en_US.UTF-8
+    state: present
+
+- name: Set UTF-8 variables for current user
+  shell: |
+    echo 'export LC_ALL="en_US.UTF-8"' >> {{ home_dir }}/.zshenv
+    echo 'export LANG="en_US.UTF-8"' >> {{ home_dir }}/.zshenv
+    echo 'export LANGUAGE="en_US.UTF-8"' >> {{ home_dir }}/.zshenv

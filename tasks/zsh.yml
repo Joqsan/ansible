@@ -2,10 +2,12 @@
   tags: zsh
   block:
     - name: Install zsh
+      become: true
       apt: name=zsh
 
     - name: Change shell
-      shell: chsh -s $(which zsh)
+      become: true
+      shell: chsh -s $(which zsh) {{ username }}
 
     - name: Install ohmyzsh
       shell: sh -c "$(curl -fsSL https://install.ohmyz.sh/)"

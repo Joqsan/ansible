@@ -2,6 +2,7 @@
   tags: dotfiles
   block:
     - name: Install stow
+      become: true
       apt: name=stow
 
     - name: Clone .dotfiles

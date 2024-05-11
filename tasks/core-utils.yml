@@ -1,36 +1,41 @@
-- name: Install core packages
-  apt:
-    name: "{{ item }}"
-    state: latest
-  with_items:
-      - git
-      - wget
-      - unzip
-      - curl
-      - ripgrep  # needed for telescope.nvim
-      - fd-find  # needed for venv-selector.nvim
-      - locales  # needed for setting UTF-8 for tmux (to use tmux instead of tmux -u)
-  tags:
-    - core
+- name: Install core dependencies
+  become: true
+  tags: docker
+  block:
+    - name: Install apt core packages
+      apt:
+        name: "{{ item }}"
+        state: latest
+      with_items:
+          - git
+          - wget
+          - unzip
+          - curl
+          - ripgrep  # needed for telescope.nvim
+          - fd-find  # needed for venv-selector.nvim
+          - locales  # needed for setting UTF-8 for tmux (to use tmux instead of tmux -u)
+      tags:
+        - core
 
-- name: Get fdfind path
-  command: which fdfind
-  register: fdfind_path
+    - name: Get fdfind path
+      command: which fdfind
+      register: fdfind_path
 
-- name: Setup fdfind symlink according to docs
-  file:
-    src: "{{ fdfind_path.stdout }}"
-    dest: "/usr/local/bin/fd"
-    state: link
-  when: fdfind_path is succeeded
+    - name: Setup fdfind symlink according to docs
+      file:
+        src: "{{ fdfind_path.stdout }}"
+        dest: "/usr/local/bin/fd"
+        state: link
+      when: fdfind_path is succeeded
 
-- name: Generate UTF-8 localisation files
-  locale_gen:
-    name: en_US.UTF-8
-    state: present
+    - name: Generate UTF-8 localisation files
+      locale_gen:
+        name: en_US.UTF-8
+        state: present
 
-- name: Set UTF-8 variables for current user
-  shell: |
-    echo 'export LC_ALL="en_US.UTF-8"' >> {{ home_dir }}/.zshenv
-    echo 'export LANG="en_US.UTF-8"' >> {{ home_dir }}/.zshenv
-    echo 'export LANGUAGE="en_US.UTF-8"' >> {{ home_dir }}/.zshenv
+    - name: Set UTF-8 variables for current user
+      become_user: "{{ username }}"
+      shell: |
+        echo 'export LC_ALL="en_US.UTF-8"' >> {{ home_dir }}/.zshenv
+        echo 'export LANG="en_US.UTF-8"' >> {{ home_dir }}/.zshenv
+        echo 'export LANGUAGE="en_US.UTF-8"' >> {{ home_dir }}/.zshenv

@@ -1,4 +1,5 @@
 - name: Set Python environment
+  become: true
   tags: python
   block:
     - name: Install nodejs for pyright lsp
@@ -11,11 +12,13 @@
         libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
     
     - name: Install pyenv
+      become_user: "{{ username }}"
       git:
         repo: 'https://github.com/pyenv/pyenv.git'
         dest: "{{ home_dir }}/.pyenv"
     
     - name: Setup shell environment for pyenv
+      become_user: "{{ username }}"
       shell: |
         echo 'export PYENV_ROOT="{{ home_dir }}/.pyenv"' >> {{ home_dir }}/.zshrc
         echo '[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"' >> {{ home_dir }}/.zshrc
@@ -24,12 +27,14 @@
         executable: /bin/zsh
 
     - name: Install latest Python 3.11 version
+      become_user: "{{ username }}"
       shell: source {{ home_dir }}/.zshrc && pyenv install 3.11
       args:
         executable: /bin/zsh
     
     # Why this works this way?
     - name: Set the latest Python 3.11 version globally
+      become_user: "{{ username }}"
       shell: source {{ home_dir }}/.zshrc && pyenv global 3.11
       args:
         executable: /bin/zsh

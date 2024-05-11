@@ -1,7 +1,9 @@
 - name: Add productivity tools
+  become: true
   tags: productivity
   block:
     - name: Install fzf
+      become_user: "{{ username }}"
       shell: git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install
 
     - name: Download tmux dependencies

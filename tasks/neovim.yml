@@ -1,4 +1,5 @@
 - name: Install neovim
+  become: true
   tags: neovim
   block:
     - name: Download neovim binaries
@@ -9,4 +10,5 @@
         tar -C /opt -xzf nvim-linux64.tar.gz
 
     - name: Add neovim binaries to PATH
+      become_user: "{{ username }}"
       shell: echo 'export PATH="$PATH:/opt/nvim-linux64/bin"' >> {{ home_dir }}/.zshrc

@@ -1,6 +1,6 @@
 - name: Install core dependencies
   become: true
-  tags: docker
+  tags: core
   block:
     - name: Install apt core packages
       apt:
@@ -14,8 +14,6 @@
           - ripgrep  # needed for telescope.nvim
           - fd-find  # needed for venv-selector.nvim
           - locales  # needed for setting UTF-8 for tmux (to use tmux instead of tmux -u)
-      tags:
-        - core
 
     - name: Get fdfind path
       command: which fdfind

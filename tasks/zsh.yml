@@ -8,9 +8,15 @@
     - name: Change shell
       become: true
       shell: chsh -s $(which zsh) {{ username }}
-
+    
+    - name: Check if .oh-my-zsh exists
+      stat:
+        path: "{{ home_dir }}/.oh-my-zsh"
+      register: ohmyzsh_filepath
+    
     - name: Install ohmyzsh
       shell: sh -c "$(curl -fsSL https://install.ohmyz.sh/)"
+      when: ohmyzsh_filepath.stat.exists == False
       
     - name: Download powerlevel10k theme
       shell: git clone --depth=1 https://github.com/romkatv/powerlevel10k.git {{ home_dir }}/.oh-my-zsh/custom/themes/powerlevel10k

@@ -28,4 +28,5 @@
     - import_tasks: tasks/fonts.yml
     - import_tasks: tasks/vscode.yml
     - import_tasks: tasks/neovim.yml
+    - import_tasks: tasks/pwd-store.yml
     # - import_tasks: tasks/docker.yml

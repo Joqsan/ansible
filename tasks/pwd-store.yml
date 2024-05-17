@@ -1,0 +1,17 @@
+- name: Set password store
+  tags: pass
+  block:
+    - name: Install passwordstore
+      become: true
+      apt:
+        name: pass
+        state: latest
+    
+    - name: Git clone pwd-store
+      git:
+        repo: 'git@github.com:Joqsan/pwd-store.git'
+        dest: "{{ home_dir }}/.password-store"
+        key_file: "{{ dest_key }}"
+        accept_hostkey: yes
+        version: master
+    

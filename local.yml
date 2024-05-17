@@ -25,6 +25,7 @@
     - import_tasks: tasks/dotfiles.yml
     - import_tasks: tasks/python.yml
     - import_tasks: tasks/productivity.yml
+    - import_tasks: tasks/fonts.yml
     - import_tasks: tasks/vscode.yml
     - import_tasks: tasks/neovim.yml
     # - import_tasks: tasks/docker.yml

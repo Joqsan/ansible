@@ -36,3 +36,12 @@
       shell: make install
       args:
         chdir: /usr/local/bin/tmux-{{ tmux_version }}
+    
+    - name: Install bat
+      apt:
+        name: bat
+        state: present
+    
+    - name: Alias cat to batcat
+      become_user: "{{ username }}"
+      shell: echo 'alias cat=batcat' >> {{ home_dir }}/.aliases

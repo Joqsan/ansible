@@ -1,0 +1,23 @@
+- name: Add nerd fonts
+  become: true
+  tags: fonts
+  block:
+    - name: Install fontconfig  # to get fc-list and fc-cache
+      apt:
+        name: fontconfig
+        state: present
+      
+    - name: Download JetBrainsMono fonts
+      get_url:
+        url: https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.tar.xz
+        dest: /tmp/
+
+    - name: Extract font archive
+      unarchive:
+        src: /tmp/JetBrainsMono.tar.xz
+        dest: /usr/share/fonts
+        remote_src: true
+
+    - name: Update font cache
+      command:
+        cmd: fc-cache -fv

@@ -25,7 +25,9 @@ USER $USERNAME
 WORKDIR /home/joqsan
 
 COPY --chown=joqsan:joqsan my-pass my-pass
-COPY --chown=joqsan:joqsan .ssh .ssh
+COPY --chown=joqsan:joqsan .ssh/id_ed25519.pub .ssh/id_ed25519.pub
+COPY --chown=joqsan:joqsan .ssh/config .ssh/config
+# COPY --chown=joqsan:joqsan .ssh .ssh
 COPY --chown=joqsan:joqsan tasks tasks
 COPY --chown=joqsan:joqsan local.yml local.yml
 COPY --chown=joqsan:joqsan run-ansible run-ansible

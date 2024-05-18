@@ -1,0 +1,1 @@
+docker cp $HOME/.ssh/id_ed25519 ansible-worktree:/home/joqsan/.ssh/id_ed25519

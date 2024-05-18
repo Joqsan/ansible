@@ -18,3 +18,9 @@
         src: "{{ source_key }}.pub"
         dest: "{{ dest_key }}.pub"
         mode: 0644
+    
+    - name: Install ssh config file
+      copy: 
+        src: ./.ssh/config
+        dest: "{{ home_dir }}/.ssh"
+        mode: 0600

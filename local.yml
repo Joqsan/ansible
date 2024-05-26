@@ -5,7 +5,6 @@
     source_key: "./.ssh/id_ed25519"
     dest_key: "{{ lookup('env', 'HOME') }}/.ssh/id_ed25519"
     home_dir: "{{ lookup('env', 'HOME') }}"
-    # username: "{{ lookup('env', 'USER') }}"
   become: true
   pre_tasks:
     - name: Update apt

@@ -14,6 +14,7 @@
           - ripgrep  # needed for telescope.nvim
           - fd-find  # needed for venv-selector.nvim
           - locales  # needed for setting UTF-8 for tmux (to use tmux instead of tmux -u)
+          - python3-venv # mason needs to install debugpy and ruff-lsp in their own venv
 
     - name: Get fdfind path
       command: which fdfind

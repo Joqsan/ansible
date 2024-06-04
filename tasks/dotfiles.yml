@@ -7,13 +7,10 @@
 
     - name: Clone .dotfiles
       git:
-        repo: 'git@github.com:Joqsan/.dotfiles.git'
+        repo: 'https://github.com/Joqsan/.dotfiles.git'
         dest: "{{ home_dir }}/.dotfiles"
         recursive: yes
-        key_file: "{{ dest_key }}"
-        update: yes
-        accept_hostkey: yes
-        version: master
+        version: edit-gitmodules
       
     - name: Stow dotfiles
       shell: cd {{ home_dir }}/.dotfiles && chmod +x ubuntu install && ./ubuntu

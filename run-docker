@@ -3,6 +3,6 @@ docker run \
     -e TERM \
     -v /tmp/.X11-unix:/tmp/.X11-unix:rw \
     --env="DISPLAY=host.docker.internal:0" \
-    --name=ansible-worktree \
+    --name=dev-env-container \
     --rm \
     -it dotfiles-computer bash

@@ -1,3 +1,1 @@
-# export USER=joqsan
-# ansible-playbook --ask-vault-pass local.yml
-ansible-playbook local.yml --vault-password-file my-pass
+ansible-playbook local.yml

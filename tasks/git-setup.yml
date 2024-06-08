@@ -48,3 +48,9 @@
         name: core.pager
         scope: global
         value: "cat"
+    
+    - name: Show summary of changes in submodule (git status)
+      git_config:
+        name: status.submodulesummary
+        scope: global
+        value: 1

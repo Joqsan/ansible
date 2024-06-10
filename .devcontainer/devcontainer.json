@@ -1,0 +1,45 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/docker-existing-dockerfile
+{
+	"name": "Existing Dockerfile",
+	"build": {
+		// Sets the run context to one level up instead of the .devcontainer folder.
+		// Update the 'dockerFile' property if you aren't using the standard 'Dockerfile' filename.
+		"dockerfile": "Dockerfile"
+	},
+
+	// Features to add to the dev container. More info: https://containers.dev/features.
+	// "features": {},
+	"features": {
+		// "ghcr.io/devcontainers/features/nvidia-cuda:1": {
+		// 	"installToolkit": true,
+		// 	"cudaVersion": "12.2",
+		// 	"cudnnVersion": "8.9.5.29"
+		// },
+		"ghcr.io/devcontainers/features/common-utils:2": {
+			"installZsh": true,
+			"installOhMyZsh": true,
+			"upgradePackages": false,
+			"username": "joqsan"
+		  },
+		"ghcr.io/devcontainers-contrib/features/tmux-apt-get:1": {}
+	},
+
+	"containerEnv": {
+		"SHELL": "/bin/zsh"
+	},
+
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+
+	// Uncomment the next line to run commands after the container is created.
+	"postCreateCommand": "bash .devcontainer/container_post_create.sh",
+
+	// Configure tool-specific properties.
+	// "customizations": {},
+
+	// Uncomment to connect as an existing user other than the container default. More info: https://aka.ms/dev-containers-non-root.
+	"remoteUser": "joqsan",
+	"containerUser": "joqsan"
+}

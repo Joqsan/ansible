@@ -10,7 +10,7 @@
         repo: 'https://github.com/Joqsan/.dotfiles.git'
         dest: "{{ home_dir }}/.dotfiles"
         recursive: yes
-        version: edit-gitmodules
+        version: master
       
     - name: Stow dotfiles
       shell: cd {{ home_dir }}/.dotfiles && chmod +x ubuntu install && ./ubuntu
